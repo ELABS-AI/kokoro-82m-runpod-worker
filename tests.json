@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Basic TTS - af_bella voice",
+    "input": {
+      "text": "Hello, this is a test of the Kokoro text-to-speech system.",
+      "voice": "af_bella",
+      "speed": 1.0
+    }
+  },
+  {
+    "name": "Fast speed test",
+    "input": {
+      "text": "Testing faster speech output.",
+      "voice": "am_adam",
+      "speed": 1.5
+    }
+  },
+  {
+    "name": "Japanese voice test",
+    "input": {
+      "text": "こんにちは、Kokoroです。",
+      "voice": "jf_sakura",
+      "speed": 1.0
+    }
+  }
+]

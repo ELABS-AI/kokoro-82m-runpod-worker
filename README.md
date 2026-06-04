@@ -1,20 +1,34 @@
 # elabs / Kokoro 82M TTS
 
-[![Run on RunPod](https://runpod.io/badge/runpod-hub)](https://runpod.io/console/hub)
+[![Deploy on RunPod](https://img.shields.io/badge/RunPod-Deploy-orange?logo=runpod)](https://console.runpod.io/hub)
+[![CUDA 12.4](https://img.shields.io/badge/CUDA-12.4-green)](https://developer.nvidia.com/cuda-toolkit)
+[![Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue)](https://opensource.org/licenses/Apache-2.0)
 
-Lightweight **text-to-speech** with ~82M parameters, supporting multiple voices and languages. Fast inference with minimal GPU memory footprint — runs on virtually any GPU.
+Lightweight **text-to-speech** synthesis with ~82M parameters. 14 built-in voices across 9 languages (English, Japanese, Chinese, Korean, French, Spanish, Hindi, Italian, Portuguese). Sub-second generation on any modern GPU.
+
+![Kokoro TTS](https://pub-796a08821c1c483aaf5e274e0d03e350.r2.dev/hub-icons/kokoro.svg)
 
 ## Highlights
 
-- **~82M parameters** — tiny model, big voice quality
-- **Multi-voice** — multiple built-in voices (American, British, Japanese, Korean, Chinese, French)
-- **Fast inference** — sub-second generation on RTX 4090 for short sentences
-- **Minimal VRAM** — works on any GPU with ≥2GB VRAM (T4, L4, RTX 4090, etc.)
-- **Configurable speed** — adjust speaking rate via `speed` parameter
+- ~82M parameters -- tiny footprint, high voice quality
+- 14 voices -- American/British English, Japanese, Chinese, Korean, French + more
+- Fast inference -- sub-second for short sentences on RTX 4090
+- Low VRAM -- runs on any GPU with >=4GB VRAM (T4, L4, RTX 4090)
+- Configurable speed -- 0.5x to 2.0x speaking rate
+
+## Quick Start
+
+```bash
+curl -X POST https://api.runpod.ai/v2/{ENDPOINT_ID}/run \
+  -H "Authorization: Bearer $RUNPOD_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"input": {"text": "Hello world", "voice": "af_bella"}}'
+```
 
 ## API
 
 ### Input
+
 ```json
 {
   "input": {
@@ -26,6 +40,7 @@ Lightweight **text-to-speech** with ~82M parameters, supporting multiple voices 
 ```
 
 ### Output
+
 ```json
 {
   "audio_base64": "<base64 WAV>",
@@ -35,25 +50,41 @@ Lightweight **text-to-speech** with ~82M parameters, supporting multiple voices 
 }
 ```
 
+### Voices
+
+| Voice ID | Language | Gender | Style |
+|---|---|---|---|
+| `af_bella` | English (US) | F | Warm, clear narration |
+| `af_heart` | English (US) | F | Friendly, expressive |
+| `am_adam` | English (US) | M | Professional |
+| `bf_emma` | English (UK) | F | British neutral |
+| `bm_george` | English (UK) | M | British authoritative |
+| `jf_sakura` | Japanese | F | Natural Japanese |
+| `zf_xiaobei` | Chinese | F | Mandarin female |
+| `ff_siwis` | French | F | French natural |
+
 ### Parameters
+
 | Parameter | Type | Default | Description |
 |---|---|---|---|
-| `text` | string | **required** | Input text to synthesize |
-| `voice` | string | `"af_bella"` | Voice ID (e.g., `af_bella`, `am_adam`, `bf_emma`, `bm_george`, `jf_sakura`, `zf_xiaobei`, `ff_siwis`) |
-| `speed` | float | `1.0` | Speaking speed multiplier (0.5–2.0) |
+| `text` | string | required | Text to synthesize (max 5000 chars) |
+| `voice` | string | `af_bella` | Voice ID |
+| `speed` | float | `1.0` | Speaking rate (0.5-2.0) |
 
 ## GPU Requirements
-- **Recommended**: Any GPU with ≥4GB VRAM (RTX 4090, L4, T4, etc.)
-- **Minimum**: Any GPU with ≥2GB VRAM
-- **CUDA**: 12.0+
 
-## Benchmark
-| GPU | Text Length | Time |
+- Minimum: >=2GB VRAM
+- Recommended: RTX 4090, L4, T4 (>=4GB VRAM)
+- CUDA: 12.4+
+
+## Benchmarks
+
+| GPU | 200 chars | 1000 chars |
 |---|---|---|
-| RTX 4090 | Short (30 chars) | ~0.2s |
-| RTX 4090 | Medium (200 chars) | ~0.5s |
-| RTX 4090 | Long (1000 chars) | ~1.8s |
-| T4 | Medium (200 chars) | ~1.2s |
+| RTX 4090 | ~0.5s | ~1.8s |
+| L4 | ~0.8s | ~3.0s |
+| T4 | ~1.2s | ~4.5s |
 
 ## License
-Apache-2.0
+
+Apache-2.0. Based on [hexgrad/Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M).
