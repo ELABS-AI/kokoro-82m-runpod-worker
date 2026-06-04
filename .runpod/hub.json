@@ -1,7 +1,8 @@
 {
-  "description": "Kokoro 82M is a lightweight text-to-speech model (~82M parameters) supporting multiple voices and languages. API: POST JSON with {text, voice, speed} -> {audio_base64, text, voice, wall_time_s}. GPU: runs on any GPU with >=2GB VRAM (T4, L4, RTX 4090, etc.). Fast inference, minimal memory footprint.",
-  "category": "audio",
+  "title": "Kokoro 82M TTS",
+  "description": "Kokoro 82M is a lightweight text-to-speech model (~82M parameters) supporting multiple voices and languages. API: POST JSON with {text, voice, speed} -> {audio_base64, text, voice, wall_time_s}. GPU: runs on any GPU with >=2GB VRAM (T4, L4, RTX 4090, etc.).",
   "type": "serverless",
+  "category": "audio",
   "config": {
     "runsOn": "GPU",
     "containerDiskInGb": 10,
@@ -31,16 +32,7 @@
           "VOICE": "af_bella",
           "SPEED": "1.0"
         }
-      },
-      {
-        "name": "Quality (slow, high-fidelity)",
-        "defaults": {
-          "VOICE": "af_bella",
-          "SPEED": "0.8"
-        }
       }
     ]
-  },
-  "title": "elabs / Kokoro 82M TTS",
-  "iconUrl": "https://pub-796a08821c1c483aaf5e274e0d03e350.r2.dev/hub-icons/kokoro.svg"
+  }
 }
