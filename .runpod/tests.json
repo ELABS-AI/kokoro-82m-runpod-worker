@@ -2,11 +2,6 @@
   "tests": [
     {
       "name": "Fast inference (single sentence)",
-      "config": {
-        "gpuTypeId": "NVIDIA GeForce RTX 4090",
-        "gpuCount": 1,
-        "allowedCudaVersions": ["12.4"]
-      },
       "input": {
         "input": {
           "text": "The quick brown fox jumps over the lazy dog.",
@@ -17,11 +12,6 @@
     },
     {
       "name": "Long-form quality (multi-sentence)",
-      "config": {
-        "gpuTypeId": "NVIDIA GeForce RTX 4090",
-        "gpuCount": 1,
-        "allowedCudaVersions": ["12.4"]
-      },
       "input": {
         "input": {
           "text": "Welcome to Kokoro 82M, a lightweight text-to-speech system. It supports multiple voices and languages with fast inference. Try it today for realistic speech synthesis.",
@@ -30,5 +20,10 @@
         }
       }
     }
-  ]
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "allowedCudaVersions": ["12.4"]
+  }
 }
