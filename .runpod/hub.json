@@ -1,14 +1,14 @@
 {
-  "title": "Kokoro 82M TTS",
-  "description": "Kokoro 82M is a lightweight text-to-speech model (~82M parameters) supporting multiple voices and languages. API: POST JSON with {text, voice, speed} -> {audio_base64, text, voice, wall_time_s}. GPU: runs on any GPU with >=2GB VRAM (T4, L4, RTX 4090, etc.).",
-  "iconUrl": "https://pub-796a08821c1c483aaf5e274e0d03e350.r2.dev/hub-icons/kokoro.svg",
-  "type": "serverless",
+  "title": "elabs / Kokoro 82M TTS",
+  "description": "Kokoro 82M lightweight text-to-speech with 9 language voices. Fast and high-quality. Input: {text, voice, lang} -> Output: {audio_b64, wall_time_s}.",
   "category": "audio",
+  "type": "serverless",
+  "iconUrl": "https://pub-796a08821c1c483aaf5e274e0d03e350.r2.dev/hub-icons/kokoro.svg",
   "config": {
     "runsOn": "GPU",
     "containerDiskInGb": 10,
     "gpuCount": 1,
-    "gpuIds": "ADA_24,ADA_48,AMPERE_48,AMPERE_16,TURING_16",
+    "gpuIds": "ADA_24,ADA_48_PRO,AMPERE_24",
     "allowedCudaVersions": [
       "12.8",
       "12.7",
@@ -22,17 +22,16 @@
     ],
     "env": [
       {
-        "key": "PYTORCH_CUDA_ALLOC_CONF",
-        "value": "expandable_segments:True"
-      }
-    ],
-    "presets": [
+        "key": "MODEL_ID",
+        "value": "hexgrad/Kokoro-82M"
+      },
       {
-        "name": "Fast (default voice)",
-        "defaults": {
-          "VOICE": "af_bella",
-          "SPEED": "1.0"
-        }
+        "key": "HF_HOME",
+        "value": "/runpod-volume/models/huggingface"
+      },
+      {
+        "key": "HUGGINGFACE_HUB_CACHE",
+        "value": "/runpod-volume/models/huggingface/hub"
       }
     ]
   }
